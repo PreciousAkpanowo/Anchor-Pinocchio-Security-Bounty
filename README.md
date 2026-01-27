@@ -1,1 +1,0 @@
-# Anchor-Pinocchio-Security-Bounty
