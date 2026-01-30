@@ -64,7 +64,7 @@ pub mod missing_signer_vulnerable {
         anchor_lang::system_program::transfer(cpi_context, amount)?;
         
         vault.balance = vault.balance.checked_sub(amount).unwrap();
-        msg!("❌ Withdrew {} lamports WITHOUT signature check!", amount);
+        msg!("    Withdrew {} lamports WITHOUT signature check!", amount);
         Ok(())
     }
 }

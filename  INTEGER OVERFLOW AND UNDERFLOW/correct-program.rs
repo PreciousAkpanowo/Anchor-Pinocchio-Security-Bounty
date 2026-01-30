@@ -14,55 +14,55 @@ pub mod integer_overflow_secure {
         Ok(())
     }
 
-    /// ✅ SECURE: Uses checked_add
+    ///   SECURE: Uses checked_add
     pub fn add_points(ctx: Context<UpdateUser>, points: u64) -> Result<()> {
         let user = &mut ctx.accounts.user;
         
-        // ✅ Returns None on overflow, we handle it
+        //   Returns None on overflow, we handle it
         user.points = user.points
             .checked_add(points)
             .ok_or(ErrorCode::Overflow)?;
         
-        msg!("✅ Added points safely: {}", user.points);
+        msg!("  Added points safely: {}", user.points);
         Ok(())
     }
 
-    /// ✅ SECURE: Uses checked_sub
+    ///   SECURE: Uses checked_sub
     pub fn remove_points(ctx: Context<UpdateUser>, points: u64) -> Result<()> {
         let user = &mut ctx.accounts.user;
         
-        // ✅ Returns None on underflow
+        //   Returns None on underflow
         user.points = user.points
             .checked_sub(points)
             .ok_or(ErrorCode::InsufficientPoints)?;
         
-        msg!("✅ Removed points safely: {}", user.points);
+        msg!("  Removed points safely: {}", user.points);
         Ok(())
     }
 
-    /// ✅ SECURE: Uses checked_mul
+    ///   SECURE: Uses checked_mul
     pub fn calculate_tokens(ctx: Context<UpdateUser>, multiplier: u64) -> Result<()> {
         let user = &mut ctx.accounts.user;
         
-        // ✅ Returns None on overflow
+        //   Returns None on overflow
         user.tokens = user.points
             .checked_mul(multiplier)
             .ok_or(ErrorCode::Overflow)?;
         
-        msg!("✅ Calculated tokens safely: {}", user.tokens);
+        msg!("  Calculated tokens safely: {}", user.tokens);
         Ok(())
     }
 
-    /// ✅ SECURE: Uses checked_div
+    ///   SECURE: Uses checked_div
     pub fn calculate_average(ctx: Context<UpdateUser>, divisor: u64) -> Result<()> {
         let user = &mut ctx.accounts.user;
         
-        // ✅ Returns None on division by zero
+        //   Returns None on division by zero
         user.tokens = user.points
             .checked_div(divisor)
             .ok_or(ErrorCode::DivisionByZero)?;
         
-        msg!("✅ Average calculated safely: {}", user.tokens);
+        msg!("  Average calculated safely: {}", user.tokens);
         Ok(())
     }
 }
